@@ -6,7 +6,7 @@ const authController = require('./controllers/authController.js');
 
 
 router.use(homeController);
-router.use(authController);
+router.use(authController);//router.use('/auth',authController);
 
 
 

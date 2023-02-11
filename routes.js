@@ -2,8 +2,11 @@ const router = require('express').Router();
 
 const homeController = require('./controllers/homeController.js');
 
-router.use(homeController);
+const authController = require('./controllers/authController.js');
 
+
+router.use(homeController);
+router.use(authController);
 
 
 

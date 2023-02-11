@@ -2,7 +2,7 @@ const User = require('../models/User.js');
 
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonWebToken.js');
-const SECRET = 'Somesecretsecret';
+const {SECRET} = require('../constans.js');
 
 exports.findByUsername = (username) => User.findOne({ username });//User.exists({username})
 exports.findByEmail = (email) => User.findOne({ email });//User.exists({email})

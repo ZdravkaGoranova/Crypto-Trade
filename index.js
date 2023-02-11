@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const routes = require('./routes.js');
+const { authentication } = require('./middlewares/authenticationMddleware.js')
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.set('view engine', 'hbs')
 app.use('/static', express.static('public'));
 app.use(express.urlencoded({ extended: false }));//add body parser
 app.use(cookieParser());
+app.use(authentication);//важно е мястото
 app.use(routes);
 
 //TODO:change database name

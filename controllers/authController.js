@@ -6,8 +6,10 @@ const authService = require('../services/authServices.js');
 router.get('/login', (req, res) => {
     res.render('auth/login')
 });
-router.post('/login', (req, res) => {
+router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+
+    await authService.login(email, password);
 
 
     res.redirect('/');

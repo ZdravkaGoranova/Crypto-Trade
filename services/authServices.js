@@ -2,7 +2,8 @@ const User = require('../models/User.js');
 
 const bcrypt = require('bcrypt');
 
-exports.findByUsername = (username) => User.findOne(username);//User.exists(username)
+exports.findByUsername = (username) => User.findOne({ username });//User.exists({username})
+exports.findByEmail = (email) => User.findOne({ email });//User.exists({email})
 
 exports.register = async (username, email, password, confirmPassword) => {
 
@@ -25,7 +26,24 @@ exports.register = async (username, email, password, confirmPassword) => {
     const hashPassword = await bcrypt.hash(password, 10);
 
     await User.create({ username, email, password: hashPassword });
+};
 
+
+exports.login = async (email, password) => {
+
+    //Email/User exist
+    const user = await this.findByEmail(email);
+    if (!user) {
+        throw new Error('Invalid email or password!');
+    }
+
+    //Password is valid
+    const isValid = await bcrypt.compare(user.password, password);
+    if (!isValid) {
+        throw new Error('Invalid email or password!');
+    };
+
+    //Generated token
 
 }
 

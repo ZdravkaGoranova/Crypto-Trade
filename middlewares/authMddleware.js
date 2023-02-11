@@ -1,5 +1,5 @@
 const jwt = require('../lib/jsonWebToken.js');
-const {SECRET} = require('../constans.js');
+const { SECRET } = require('../constans.js');
 
 exports.authentication = async (req, res, next) => {
 
@@ -20,3 +20,11 @@ exports.authentication = async (req, res, next) => {
     next();
 };
 
+exports.isAuth = async (req, res, next) => {
+
+    if (!req.user) {
+        res.redirect('/login');
+    }
+
+
+};

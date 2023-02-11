@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const routes = require('./routes.js');
-const { authentication } = require('./middlewares/authenticationMddleware.js')
+const { authentication,isAuth } = require('./middlewares/authMddleware.js')
 
 const app = express();
 

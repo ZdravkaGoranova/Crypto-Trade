@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
 const routes = require('./routes.js');
-const { authentication,isAuth } = require('./middlewares/authMddleware.js')
+const { authentication } = require('./middlewares/authMddleware.js')
 
 const app = express();
 
@@ -13,7 +13,6 @@ app.engine('hbs', handlebars.engine({
 }));
 
 app.set('view engine', 'hbs')
-
 
 app.use('/static', express.static('public'));
 app.use(express.urlencoded({ extended: false }));//add body parser

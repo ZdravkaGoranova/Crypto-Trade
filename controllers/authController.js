@@ -2,7 +2,11 @@ const router = require('express').Router();
 
 const authService = require('../services/authServices.js');
 const { isAuth } = require('../middlewares/authMddleware.js')
-const { getErrorMessage } = require('../utils/errorUtils.js')
+const { getErrorMessage } = require('../utils/errorUtils.js');
+
+
+const Crypto = require('../models/Crypto.js');
+
 
 router.get('/login', (req, res) => {
     res.render('auth/login')
@@ -47,29 +51,20 @@ router.get('/logout', isAuth, (req, res) => {
 });
 //////:)
 
-router.get('/create', (req, res) => {
-    res.render('crypto/create');
-
-});
-router.post('/create', (req, res) => {
-    const { name, image, price, description, payment } = req.body;
 
 
+router.get('/catalog', async (req, res) => {
 
 
-    res.redirect('/catalog')
-});
-
-
-
-router.get('/catalog', (req, res) => {
-    res.render('crypto/catalog');
+    console.log(Crypto)
+    let cryptos = await Crypto.find().lean();
+    console.log(cryptos)
+    // res.render('index', { cubes, search, difficultyFrom, diffficultyTo });
+    res.render('crypto/catalog', { cryptos });
 
 });
 
-router.post('/catalog', (req, res) => {
-    
-});
+
 
 router.get('/search', (req, res) => {
     res.render('home/search');

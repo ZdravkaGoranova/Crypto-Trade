@@ -1,15 +1,15 @@
 exports.generatePaymentMethod = function (paymentMethod) {
     const paymentMethods = [
-        { key: 'crypto-wallet', selected: false },
-        { key: 'credit-card', selected: false },
-        { key: 'debit-card', selected: false },
-        { key: 'paypal', selected: false },
-        
+        { key: 'crypto-wallet', label: "Crypto Wallet", selected: false },
+        { key: 'credit-card', label: "Credit Card", selected: false },
+        { key: 'debit-card', label: "Debit Card", selected: false },
+        { key: 'paypal', label: "PayPal", selected: false },
+
     ];
 
     const result = paymentMethods.map(x => x.key === paymentMethod ? { ...x, selected: true } : x);
 
-    //console.log(result)
+    console.log(result)
     return result;
 };
 

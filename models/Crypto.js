@@ -26,13 +26,12 @@ const cryptoShema = new mongoose.Schema({
     },
     paymentMethod: {
         type: String,//String(crypto - wallet, credit - card, debit - card, paypal) required,
-        required: true,
+        required: false,
         //•	The Payment Method must be one of the options
     },
 
     // buyaCrypto - a collection of Users(a reference to the User model)
     // buyaCrypto: {
-
     // },
 
 

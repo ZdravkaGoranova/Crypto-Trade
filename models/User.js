@@ -5,17 +5,17 @@ const userShema = new mongoose.Schema({
 
     username: {
         type: String,
-        required: true,
+        required: [true, 'Username is required!'],
         minLenght: 5,
     },
     email: {
         type: String,
-        required: true,
+        required:  [true, 'Email is required!'],
         minLenght: 10,
     },
     password: {
         type: String,
-        required: true,
+        required:  [true, 'Password is required!'],
         minLenght: 4,
     },
     // }, {

@@ -33,6 +33,13 @@
         </nav>
     </header>
 
+    {{#if error}}
+    <div class="errorContainer">
+        <p>{{error}}</p>
+     </div>
+    </div>
+    {{/if}}
+
     {{{body}}}
 
     <footer>

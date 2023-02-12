@@ -14,26 +14,30 @@ exports.register = async (username, email, password, confirmPassword) => {
     }
 
     //TODO:Check user exists
-    const existingUser = await this.findByUsername(username);
-    // User.findOne({
-    //     $or: [
-    //         { email },
-    //         { username }
-    //     ]
-    // });
+    //const existingUser = await this.findByUsername(username);
+
+
+    const existingUser = await User.findOne({
+        $or: [
+            { email },
+            { username }
+        ]
+    });
 
     if (existingUser) {
         throw new Error('User  exists!');
     }
 
     //TODO:Validate password колко дълга ,симшоли език,гл .букви
-    if (password.lenght < 4) {
-        throw new Error('The password should be at least four characters long!');
-    }
+    // if (password.lenght < 4) {
+    //     throw new Error('The password should be at least four characters long!');
+    // }
 
     const hashPassword = await bcrypt.hash(password, 10);
 
     await User.create({ username, email, password: hashPassword });
+
+    return this.login(email, password);
 };
 
 
@@ -58,7 +62,7 @@ exports.login = async (email, password) => {
         username: user.username,
     };
 
-    const token = await jwt.sing(payload,SECRET);
+    const token = await jwt.sing(payload, SECRET);
 
     return token;
 }

@@ -11,7 +11,6 @@ const app = express();
 app.engine('hbs', handlebars.engine({
     extname: 'hbs',
 }));
-
 app.set('view engine', 'hbs')
 
 app.use('/static', express.static('public'));

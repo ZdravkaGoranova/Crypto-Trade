@@ -45,5 +45,36 @@ router.get('/logout', isAuth, (req, res) => {
     res.redirect('/');
 
 });
+//////:)
+
+router.get('/create', (req, res) => {
+    res.render('crypto/create');
+
+});
+router.post('/create', (req, res) => {
+    const { name, image, price, description, payment } = req.body;
+
+
+
+
+    res.redirect('/catalog')
+});
+
+
+
+router.get('/catalog', (req, res) => {
+    res.render('crypto/catalog');
+
+});
+
+router.post('/catalog', (req, res) => {
+    
+});
+
+router.get('/search', (req, res) => {
+    res.render('home/search');
+
+});
+
 
 module.exports = router;

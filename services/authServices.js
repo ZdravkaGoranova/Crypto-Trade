@@ -2,7 +2,7 @@ const User = require('../models/User.js');
 
 const bcrypt = require('bcrypt');
 const jwt = require('../lib/jsonWebToken.js');
-const {SECRET} = require('../constans.js');
+const { SECRET } = require('../constans.js')
 
 exports.findByUsername = (username) => User.findOne({ username });//User.exists({username})
 exports.findByEmail = (email) => User.findOne({ email });//User.exists({email})
@@ -31,7 +31,6 @@ exports.register = async (username, email, password, confirmPassword) => {
         throw new Error('The password should be at least four characters long!');
     }
 
-
     const hashPassword = await bcrypt.hash(password, 10);
 
     await User.create({ username, email, password: hashPassword });
@@ -59,7 +58,7 @@ exports.login = async (email, password) => {
         username: user.username,
     };
 
-    const token = await jwt.sing(payload, SECRET);
+    const token = await jwt.sing(payload,SECRET);
 
     return token;
 }

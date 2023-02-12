@@ -1,1 +1,1 @@
-exports.SECRET = 'Somesecretsecret';
+exports.SECRET = `SMILY`;

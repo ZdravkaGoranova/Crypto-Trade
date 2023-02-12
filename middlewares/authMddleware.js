@@ -26,5 +26,5 @@ exports.isAuth = async (req, res, next) => {
         res.redirect('/login');
     }
 
-
+    next();
 };

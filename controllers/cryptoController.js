@@ -53,11 +53,11 @@ exports.getDetails = async (req, res) => {
     // console.log(req.params);
     // console.log(req.params.cryptoId);
 
-    console.log(`=========================================`)
-    console.log(crypto.owner.toString())
+    // console.log(`=========================================`)
+    // console.log(crypto.owner.toString())
 
     const isOwner = cryptoUtils.isOwner(req.user, crypto);
-    console.log(isOwner)
+   // console.log(isOwner)
 
     res.render('crypto/details', { crypto, isOwner});
 

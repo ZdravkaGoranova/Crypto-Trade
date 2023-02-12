@@ -12,7 +12,7 @@ const cryptoShema = new mongoose.Schema({
         required: true,
         match: [/^http[s]?:\/\//, 'Invalid URL'],
         // http / httpsvalidation 
-        //he Crypto Image should start with http:// or https://.
+        
     },
     price: {
         type: Number,
@@ -26,7 +26,7 @@ const cryptoShema = new mongoose.Schema({
     },
     paymentMethod: {
         type: String,//String(crypto - wallet, credit - card, debit - card, paypal) required,
-        required: false,
+        required: true,
         //•	The Payment Method must be one of the options
     },
 

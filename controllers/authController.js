@@ -46,11 +46,5 @@ router.get('/logout', isAuth, (req, res) => {
     res.redirect('/');
 
 });
-//////:)
-
-
-
-
-
 
 module.exports = router;

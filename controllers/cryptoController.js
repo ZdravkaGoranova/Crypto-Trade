@@ -1,4 +1,6 @@
 
+const router = require('express').Router();
+
 const Crypto = require('../models/Crypto.js');
 
 const cryptoService = require('../services/cryptoServices.js');
@@ -34,4 +36,29 @@ exports.postCreateCrypto = async (req, res) => {
     }
     //redirect
     res.redirect('/catalog');
+};
+
+exports.getDetails = async (req, res) => {
+
+    //const crypto = await Crypto.findById(req.params.cryptoId).lean();
+    //(cryptoId) => Crypto.findById(cryptoId).lean();
+
+    const crypto = await cryptoService.getOne(req.params.cryptoId)
+
+    if (!crypto) {
+        return res.redirect('/404');
+    }
+
+    console.log(req.user._id);
+    // console.log(req.params);
+    // console.log(req.params.cryptoId);
+
+    console.log(`=========================================`)
+    console.log(crypto.owner.toString())
+
+    const isOwner = cryptoUtils.isOwner(req.user, crypto);
+    console.log(isOwner)
+
+    res.render('crypto/details', { crypto, isOwner});
+
 };

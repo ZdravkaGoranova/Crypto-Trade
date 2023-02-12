@@ -5,9 +5,6 @@ const { isAuth } = require('../middlewares/authMddleware.js')
 const { getErrorMessage } = require('../utils/errorUtils.js');
 
 
-const Crypto = require('../models/Crypto.js');
-
-
 router.get('/login', (req, res) => {
     res.render('auth/login')
 });
@@ -53,23 +50,7 @@ router.get('/logout', isAuth, (req, res) => {
 
 
 
-router.get('/catalog', async (req, res) => {
 
-
-    console.log(Crypto)
-    let cryptos = await Crypto.find().lean();
-    console.log(cryptos)
-    // res.render('index', { cubes, search, difficultyFrom, diffficultyTo });
-    res.render('crypto/catalog', { cryptos });
-
-});
-
-
-
-router.get('/search', (req, res) => {
-    res.render('home/search');
-
-});
 
 
 module.exports = router;

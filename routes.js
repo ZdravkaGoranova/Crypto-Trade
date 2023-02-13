@@ -21,16 +21,13 @@ router.post('/create', isAuth, cryptoController.postCreateCrypto);
 router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);
 
 router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);
-
+router.post('/cryptos/:cryptoId/edit', isAuth, cryptoController.postEditCrypto);
 
 // router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
 // router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
-// router.post('/cubes/:cubeId/edit', handleRequest(cubeControler.postEditCube));
 
 
 router.get('/cryptos/:cryptoId/delete', isAuth, cryptoController.getDeleteCrypto);
-
-
 
 
 module.exports = router;

@@ -78,17 +78,27 @@ exports.getEditCrypto = async (req, res) => {
     res.render('crypto/edit', { crypto, paymentMethods });
 };
 
-exports.getEditCrypto = async (req, res) => {
 
-    const crypto = await cryptoService.getOne(req.params.cryptoId);
-    const paymentMethods = cryptoUtils.generatePaymentMethod(crypto.paymentMethod);
+exports.postEditCrypto = async (req, res) => {
 
-    if (!cryptoUtils.isOwner(req.user, crypto)) {
-        throw new Error('You are not a n owner!');
+    const { name, image, price, description, paymentMethod } = req.body
+
+    try {
+        await cryptoService.update(req.params.cryptoId, {
+            name,
+            image,
+            price,
+            description,
+            paymentMethod
+        })
+    } catch (err) {
+        console.log(err.message);
     }
-
-    res.render('crypto/edit', { crypto, paymentMethods });
+    res.redirect(`/cryptos/${req.params.cryptoId}/details`);
 };
+
+
+
 
 exports.getDeleteCrypto = async (req, res) => {
     const crypto = await cryptoService.getOne(req.params.cryptoId);
@@ -100,7 +110,7 @@ exports.getDeleteCrypto = async (req, res) => {
         return res.redirect('/404');
     }
 
-    await cryptoService.delete(req.params.cubeId);
+    await cryptoService.delete(req.params.cryptoId);
     res.redirect('/catalog');
 };
 

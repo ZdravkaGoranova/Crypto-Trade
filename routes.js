@@ -18,9 +18,9 @@ router.use(authController);//router.use('/auth',authController);
 router.get('/create', isAuth, cryptoController.getCreateCrypto);
 router.post('/create', isAuth, cryptoController.postCreateCrypto);
 
-router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);//път към детайла
+router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);
 
-// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
+router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);
 
 
 

@@ -7,7 +7,7 @@ exports.generatePaymentMethod = function (paymentMethod) {
 
     ];
 
-    const result = paymentMethods.map(x => x.key === paymentMethod ? { ...x, selected: true } : x);
+    const result = paymentMethods.map(x => x.key == paymentMethod ? { ...x, selected: true } : x);
 
     console.log(result)
     return result;
@@ -15,6 +15,6 @@ exports.generatePaymentMethod = function (paymentMethod) {
 
 exports.isOwner = (user, crypto) => {
 
-    return crypto.owner.toString() == user._id;
-   // return crypto.owner == user._id;
+    //return crypto.owner.toString() == user._id;// x.key === paymentMethod
+    return crypto.owner == user._id;// x.key == paymentMethod
 };

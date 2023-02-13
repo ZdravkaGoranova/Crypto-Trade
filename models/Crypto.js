@@ -12,7 +12,7 @@ const cryptoShema = new mongoose.Schema({
         required: true,
         match: [/^http[s]?:\/\//, 'Invalid URL'],
         // http / httpsvalidation 
-        
+
     },
     price: {
         type: Number,
@@ -25,15 +25,16 @@ const cryptoShema = new mongoose.Schema({
         minLenght: [10, 'Description should be a minimum of 10 characters long!'],
     },
     paymentMethod: {
-        type: String,//String(crypto - wallet, credit - card, debit - card, paypal) required,
+        type: String,
         required: true,
-        //•	The Payment Method must be one of the options
     },
 
     // buyaCrypto - a collection of Users(a reference to the User model)
-    // buyaCrypto: {
+    //?????????????
+    // buy: {
+    //     type: mongoose.Types.Array,
+    //     ref: 'User'
     // },
-
 
     // owner - object Id(a reference to the User model)
     owner: {

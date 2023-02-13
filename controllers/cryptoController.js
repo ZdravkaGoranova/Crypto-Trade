@@ -6,6 +6,8 @@ const Crypto = require('../models/Crypto.js');
 const cryptoService = require('../services/cryptoServices.js');
 const cryptoUtils = require('../utils/cryptoUtils.js');
 
+
+
 exports.getCreateCrypto = (req, res) => {
     console.log(req.user);
 
@@ -25,6 +27,7 @@ exports.postCreateCrypto = async (req, res) => {
             price,
             description,
             paymentMethod,
+            //  buy: req.user._id,
             owner: req.user._id,
         });
         console.log(crypto);
@@ -57,8 +60,20 @@ exports.getDetails = async (req, res) => {
     // console.log(crypto.owner.toString())
 
     const isOwner = cryptoUtils.isOwner(req.user, crypto);
-   // console.log(isOwner)
+    // console.log(isOwner)
 
-    res.render('crypto/details', { crypto, isOwner});
+    res.render('crypto/details', { crypto, isOwner });
 
+};
+
+exports.getEditCrypto = async (req, res) => {
+
+    const crypto = await cryptoService.getOne(req.params.cryptoId);
+    const paymentMethods = cryptoUtils.generatePaymentMethod(crypto.paymentMethod);
+
+    if (!cryptoUtils.isOwner(req.user, crypto)) {
+        throw new Error('You are not a n owner!');
+    }
+
+    res.render('crypto/edit', { crypto, paymentMethods });
 };

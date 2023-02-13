@@ -20,6 +20,7 @@ exports.authentication = async (req, res, next) => {
             return res.status(401).render('home/404');
         }
     }
+    //req.user = {};ako e undefinde да върне false
     next();
 };
 
@@ -28,6 +29,7 @@ exports.isAuth = async (req, res, next) => {
     if (!req.user) {
         return res.redirect('/login');
     }
-
     next();
 };
+
+

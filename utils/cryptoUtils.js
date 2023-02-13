@@ -16,5 +16,6 @@ exports.generatePaymentMethod = function (paymentMethod) {
 exports.isOwner = (user, crypto) => {
 
     //return crypto.owner.toString() == user._id;// x.key === paymentMethod
-    return crypto.owner == user._id;// x.key == paymentMethod
+    // return crypto.owner == user._id;// x.key == paymentMethod
+    return crypto.owner == user?._id;
 };

@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
 });
 
 
-router.get('/catalog', async (req, res) => {
+router.get('/catalog', async (req, res) => {//
 
     let cryptos = await Crypto.find().lean();
    // console.log(cryptos)

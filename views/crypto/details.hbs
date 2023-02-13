@@ -13,7 +13,7 @@
                 <p id="description">{{crypto.description}}</p>
             </div>
             <div class="product-btn">
-
+                {{#if isAuthenticated}}
                 {{#if isOwner}}
                 <div class="author">
                     <a href="/cryptos/{{crypto._id}}/edit" class="btn-edit">Edit</a>
@@ -21,11 +21,14 @@
                 </div>
                 {{else}}
 
-
-                <a href="#" class="btn-buy">Buy</a>
-
+                {{#if isBuyer}}
                 <p class="buy-message">You already bought these crypto coins.</p>
 
+                {{else}}
+                <a href="/cryptos/{{crypto._id}}/buy" class="btn-buy">Buy</a>
+                {{/if}}
+
+                {{/if}}
                 {{/if}}
 
                 <!--Only for registered user and author of the publication -->

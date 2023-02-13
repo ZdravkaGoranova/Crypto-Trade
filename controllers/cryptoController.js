@@ -2,14 +2,14 @@
 const router = require('express').Router();
 
 const Crypto = require('../models/Crypto.js');
-
 const cryptoService = require('../services/cryptoServices.js');
 const cryptoUtils = require('../utils/cryptoUtils.js');
+const { getErrorMessage } = require('../utils/errorUtils.js')
+const { isAuth, authentication } = require('../middlewares/authMddleware.js');
 
 
-
-exports.getCreateCrypto = (req, res) => {
-    console.log(req.user);
+exports.getCreateCrypto = (req, res) => {//router.get('/'create',isAuth,(req, res))=>{
+    console.log(req.user); 
 
     res.render('crypto/create');
 };
@@ -18,7 +18,6 @@ exports.postCreateCrypto = async (req, res) => {
     console.log(req.user);
 
     try {
-        //save cube
         const { name, image, price, description, paymentMethod } = req.body;
 
         let crypto = new Crypto({
@@ -27,43 +26,41 @@ exports.postCreateCrypto = async (req, res) => {
             price,
             description,
             paymentMethod,
-            //  buy: req.user._id,
             owner: req.user._id,
         });
         console.log(crypto);
         await crypto.save();//запазва в db
 
-    } catch (err) {
-        console.log(err.message);
-        return res.render('auth/404');
+    } catch (error) {
+        console.log(error.message);
+        //return res.render('auth/404');
+        return res.status(400).render('crypto/create', { error: getErrorMessage(error) })
     }
-    //redirect
     res.redirect('/catalog');
 };
 
-exports.getDetails = async (req, res) => {
+exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req,res)=>{)
 
-    //const crypto = await Crypto.findById(req.params.cryptoId).lean();
-    //(cryptoId) => Crypto.findById(cryptoId).lean();
+    const crypto = await cryptoService.getOne(req.params.cryptoId);
+    //console.log(crypto)
 
-    const crypto = await cryptoService.getOne(req.params.cryptoId)
+    const isOwner = cryptoUtils.isOwner(req.user, crypto);//const isOwner = crypto.owner==req.user._id;
+   // console.log(isOwner)
+
+    const isBuyer = crypto.buyers?.some(id => id == req.user?._id);
+
 
     if (!crypto) {
         return res.redirect('/404');
     }
 
-    console.log(req.user._id);
+    // console.log(req.user._id);
     // console.log(req.params);
     // console.log(req.params.cryptoId);
-
     // console.log(`=========================================`)
     // console.log(crypto.owner.toString())
 
-    const isOwner = cryptoUtils.isOwner(req.user, crypto);
-    // console.log(isOwner)
-
-    res.render('crypto/details', { crypto, isOwner });
-
+    res.render('crypto/details', { crypto, isOwner, isBuyer });
 };
 
 exports.getEditCrypto = async (req, res) => {
@@ -77,7 +74,6 @@ exports.getEditCrypto = async (req, res) => {
 
     res.render('crypto/edit', { crypto, paymentMethods });
 };
-
 
 exports.postEditCrypto = async (req, res) => {
 
@@ -97,9 +93,6 @@ exports.postEditCrypto = async (req, res) => {
     res.redirect(`/cryptos/${req.params.cryptoId}/details`);
 };
 
-
-
-
 exports.getDeleteCrypto = async (req, res) => {
     const crypto = await cryptoService.getOne(req.params.cryptoId);
 
@@ -114,3 +107,11 @@ exports.getDeleteCrypto = async (req, res) => {
     res.redirect('/catalog');
 };
 
+exports.getBuy = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
+    // const crypto = await cryptoService.getOne(req.params.cryptoId);
+    // const isOwner = cryptoUtils.isOwner(req.user, crypto);
+
+    await cryptoService.buy(req.user._id, req.params.cryptoId,req, res);
+
+    res.redirect(`/cryptos/${req.params.cryptoId}/details`);
+}

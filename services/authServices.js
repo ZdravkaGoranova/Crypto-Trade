@@ -15,8 +15,6 @@ exports.register = async (username, email, password, confirmPassword) => {
 
     //TODO:Check user exists
     //const existingUser = await this.findByUsername(username);
-
-
     const existingUser = await User.findOne({
         $or: [
             { email },

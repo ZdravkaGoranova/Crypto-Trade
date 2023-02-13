@@ -12,12 +12,10 @@ const cryptoShema = new mongoose.Schema({
         required: true,
         match: [/^http[s]?:\/\//, 'Invalid URL'],
         // http / httpsvalidation 
-
     },
     price: {
         type: Number,
         required: true,
-        //•	The Price should be a positive number
     },
     description: {
         type: String,
@@ -26,21 +24,29 @@ const cryptoShema = new mongoose.Schema({
     },
     paymentMethod: {
         type: String,
+        //enum:{values:['crypto-wallet','credit-card','debit-card','paypal'],
+        //message:'Invalid paymentmethod',
+        //}
         required: true,
     },
-
-    // buyaCrypto - a collection of Users(a reference to the User model)
-    //?????????????
-    // buy: {
-    //     type: mongoose.Types.Array,
-    //     ref: 'User'
-    // },
 
     // owner - object Id(a reference to the User model)
     owner: {
         type: mongoose.Types.ObjectId,
-        ref: 'User'
-    }
+        ref: 'User',
+    },
+    buyers:[{
+        type: mongoose.Types.ObjectId,
+        ref: 'User',
+    }],
+
+    //или
+    // buyers: {
+    //     type: [mongoose.Types.ObjectId],
+    //     default: [],
+    //     ref: 'User'
+    // },
+
 });
 
 

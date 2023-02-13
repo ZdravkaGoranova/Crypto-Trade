@@ -14,11 +14,15 @@ const { isAuth } = require('./middlewares/authMddleware.js')
 router.use(homeController);
 router.use(authController);//router.use('/auth',authController);
 
+//router.use('/crypto',cryptoController);
+
 //router.use(cryptoController);
-router.get('/create', isAuth, cryptoController.getCreateCrypto);
+router.get('/create', isAuth, cryptoController.getCreateCrypto);//
 router.post('/create', isAuth, cryptoController.postCreateCrypto);
 
 router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);
+
+router.get('/cryptos/:cryptoId/buy', isAuth, cryptoController.getBuy);
 
 router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);
 router.post('/cryptos/:cryptoId/edit', isAuth, cryptoController.postEditCrypto);

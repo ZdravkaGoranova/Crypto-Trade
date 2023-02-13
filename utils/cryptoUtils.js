@@ -9,7 +9,7 @@ exports.generatePaymentMethod = function (paymentMethod) {
 
     const result = paymentMethods.map(x => x.key == paymentMethod ? { ...x, selected: true } : x);
 
-    console.log(result)
+    //console.log(result)
     return result;
 };
 

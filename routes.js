@@ -23,13 +23,13 @@ router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);
 router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);
 
 
-
 // router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
 // router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
 // router.post('/cubes/:cubeId/edit', handleRequest(cubeControler.postEditCube));
 
-// router.get('/cubes/:cubeId/delete', handleRequest(cubeControler.getDeleteCube));
-// router.post('/cubes/:cubeId/delete', handleRequest(cubeControler.postDeleteCube));
+
+router.get('/cryptos/:cryptoId/delete', isAuth, cryptoController.getDeleteCrypto);
+
 
 
 

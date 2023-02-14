@@ -20,16 +20,12 @@ router.use(authController);//router.use('/auth',authController);
 router.get('/create', isAuth, cryptoController.getCreateCrypto);//
 router.post('/create', isAuth, cryptoController.postCreateCrypto);
 
-router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);
+router.get('/cryptos/:cryptoId/details', cryptoController.getDetails);// router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
 
 router.get('/cryptos/:cryptoId/buy', isAuth, cryptoController.getBuy);
 
-router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);
+router.get('/cryptos/:cryptoId/edit', isAuth, cryptoController.getEditCrypto);// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
 router.post('/cryptos/:cryptoId/edit', isAuth, cryptoController.postEditCrypto);
-
-// router.get('/cubes/:cubeId/details', handleRequest(cubeControler.getDetails));//път към детайла
-// router.get('/cubes/:cubeId/edit', isAuthenticated, handleRequest(cubeControler.getEditCube));
-
 
 router.get('/cryptos/:cryptoId/delete', isAuth, cryptoController.getDeleteCrypto);
 

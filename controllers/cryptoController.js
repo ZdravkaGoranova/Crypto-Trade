@@ -9,7 +9,7 @@ const { isAuth, authentication } = require('../middlewares/authMddleware.js');
 
 
 exports.getCreateCrypto = (req, res) => {//router.get('/'create',isAuth,(req, res))=>{
-    console.log(req.user); 
+    console.log(req.user);
 
     res.render('crypto/create');
 };
@@ -45,13 +45,13 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
     //console.log(crypto)
 
     const isOwner = cryptoUtils.isOwner(req.user, crypto);//const isOwner = crypto.owner==req.user._id;
-   // console.log(isOwner)
+    // console.log(isOwner)
 
     const isBuyer = crypto.buyers?.some(id => id == req.user?._id);
 
 
     if (!crypto) {
-        return res.redirect('/404');
+        return res.render('home/404');
     }
 
     // console.log(req.user._id);
@@ -69,7 +69,7 @@ exports.getEditCrypto = async (req, res) => {
     const paymentMethods = cryptoUtils.generatePaymentMethod(crypto.paymentMethod);
 
     if (!cryptoUtils.isOwner(req.user, crypto)) {
-        throw new Error('You are not a n owner!');
+        throw new Error('You are not an owner!');
     }
 
     res.render('crypto/edit', { crypto, paymentMethods });
@@ -78,7 +78,7 @@ exports.getEditCrypto = async (req, res) => {
 exports.postEditCrypto = async (req, res) => {
 
     const { name, image, price, description, paymentMethod } = req.body
-
+   
     try {
         await cryptoService.update(req.params.cryptoId, {
             name,
@@ -100,7 +100,7 @@ exports.getDeleteCrypto = async (req, res) => {
     console.log(isOwner)
 
     if (!isOwner) {
-        return res.redirect('/404');
+        return res.render('home/404');
     }
 
     await cryptoService.delete(req.params.cryptoId);
@@ -111,7 +111,7 @@ exports.getBuy = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
     // const crypto = await cryptoService.getOne(req.params.cryptoId);
     // const isOwner = cryptoUtils.isOwner(req.user, crypto);
 
-    await cryptoService.buy(req.user._id, req.params.cryptoId,req, res);
+    await cryptoService.buy(req.user._id, req.params.cryptoId, req, res);
 
     res.redirect(`/cryptos/${req.params.cryptoId}/details`);
 }

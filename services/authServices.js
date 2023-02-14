@@ -12,7 +12,6 @@ exports.register = async (username, email, password, confirmPassword) => {
     if (password !== confirmPassword) {
         throw new Error('Password missmatc!');
     }
-
     //TODO:Check user exists
     //const existingUser = await this.findByUsername(username);
     const existingUser = await User.findOne({

@@ -4,6 +4,7 @@ const cryptoUtils = require('../utils/cryptoUtils.js');
 
 
 exports.All = () => Crypto.find({});
+
 exports.create = (ownerId, cryptoData) => Crypto.create({ ...cryptoData, owner: ownerId });
 
 exports.getOne = (cryptoId) => Crypto.findById(cryptoId).lean();

@@ -3,8 +3,9 @@ const mongoose = require('mongoose');
 const cryptoShema = new mongoose.Schema({
     name: {
         type: String,
+        minLength: [2, 'Name should be at least two characters!'],
         required: true,
-        minLenght: [2, 'Name should be at least two characters!'],
+
     },
     image:
     {
@@ -15,12 +16,13 @@ const cryptoShema = new mongoose.Schema({
     },
     price: {
         type: Number,
+        min: 0,
         required: true,
     },
     description: {
         type: String,
         required: true,
-        minLenght: [10, 'Description should be a minimum of 10 characters long!'],
+        minLength: [10, 'Description should be a minimum of 10 characters long!'],
     },
     paymentMethod: {
         type: String,
@@ -35,7 +37,7 @@ const cryptoShema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
     },
-    buyers:[{
+    buyers: [{
         type: mongoose.Types.ObjectId,
         ref: 'User',
     }],

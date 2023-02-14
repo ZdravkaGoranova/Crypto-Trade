@@ -3,7 +3,21 @@ const Crypto = require('../models/Crypto.js');
 const cryptoUtils = require('../utils/cryptoUtils.js');
 
 
-exports.All = () => Crypto.find({});
+exports.search = async (name, paymentMethod) => {
+
+    let cprypto = await this.getAll();
+
+    if (name) {
+        cprypto = cprypto.filter(x => x.name.toLowerCase() == name.toLowerCase())
+    }
+
+    if (paymentMethod) {
+        cprypto = cprypto.filter(x => x.paymentMethod == paymentMethod)
+    }
+    return cprypto;
+};
+
+exports.getAll = () => Crypto.find({}).lean();
 
 exports.create = (ownerId, cryptoData) => Crypto.create({ ...cryptoData, owner: ownerId });
 

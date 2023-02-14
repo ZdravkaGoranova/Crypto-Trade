@@ -52,6 +52,7 @@ exports.getDetails = async (req, res) => {//router.get('/:cryptoId/details',(req
 
     const isBuyer = crypto.buyers?.some(id => id == req.user?._id);
 
+    //crypto.paymentMethod = paymentMethodsMap[crypto.paymentMethod]
 
     if (!crypto) {
         return res.render('home/404');
@@ -113,8 +114,10 @@ exports.getDeleteCrypto = async (req, res) => {
 exports.getBuy = async (req, res) => {//router.get('/:cryptoId/buy',isAuth)
     // const crypto = await cryptoService.getOne(req.params.cryptoId);
     // const isOwner = cryptoUtils.isOwner(req.user, crypto);
-
-    await cryptoService.buy(req.user._id, req.params.cryptoId, req, res);
-
+    try {
+        await cryptoService.buy(req.user._id, req.params.cryptoId, req, res);
+    } catch (error) {
+        return res.status(400).render('home/404', { error: getErrorMessage(error) })
+    }
     res.redirect(`/cryptos/${req.params.cryptoId}/details`);
 }

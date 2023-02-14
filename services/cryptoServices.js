@@ -2,7 +2,6 @@ const Crypto = require('../models/Crypto.js');
 
 const cryptoUtils = require('../utils/cryptoUtils.js');
 
-
 exports.search = async (name, paymentMethod) => {
 
     let cprypto = await this.getAll();

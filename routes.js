@@ -9,7 +9,7 @@ const cryptoController = require('./controllers/cryptoController.js');
 const { isAuth } = require('./middlewares/authMddleware.js')
 // const { handleRequest } = require('./utils/requestUtils.js')
 
-
+const {getErrorMessage } = require('./utils/errorUtils.js')
 
 router.use(homeController);
 router.use(authController);//router.use('/auth',authController);
@@ -33,5 +33,7 @@ router.post('/cryptos/:cryptoId/edit', isAuth, cryptoController.postEditCrypto);
 
 router.get('/cryptos/:cryptoId/delete', isAuth, cryptoController.getDeleteCrypto);
 
+router.use('*', (req, res) => res.render('home/404'));
+router.use(getErrorMessage);
 
 module.exports = router;

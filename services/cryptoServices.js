@@ -16,12 +16,12 @@ exports.buy = async (userId, cryptoId, req, res) => {
     const isBought = crypto.buyers?.some(id => id == req.user?._id);
 
     if (isOwner) {
-        return res.redirect('/404');
-        // throw new Error ('You is Owner')
+        return res.render('home/404');
+        throw new Error ('You is Owner')
     }
     if (isBought) {
-        return res.redirect('/404');
-        // throw new Error ('You already bought these crypto coins.')
+        return res.render('home/404');
+         throw new Error ('You already bought these crypto coins.')
     }
 
     crypto.buyers.push(userId);

@@ -31,6 +31,9 @@ exports.postCreateCrypto = async (req, res) => {
         console.log(crypto);
         await crypto.save();//запазва в db
 
+        //или 
+        //await cryptoService.create(req.user._id, { name, image, price, description, paymentMethod })
+
     } catch (error) {
         console.log(error.message);
         //return res.render('auth/404');
@@ -78,7 +81,7 @@ exports.getEditCrypto = async (req, res) => {
 exports.postEditCrypto = async (req, res) => {
 
     const { name, image, price, description, paymentMethod } = req.body
-   
+
     try {
         await cryptoService.update(req.params.cryptoId, {
             name,
@@ -94,7 +97,7 @@ exports.postEditCrypto = async (req, res) => {
 };
 
 exports.getDeleteCrypto = async (req, res) => {
-   // const crypto = await cryptoService.getOne(req.params.cryptoId);
+    const crypto = await cryptoService.getOne(req.params.cryptoId);
 
     const isOwner = cryptoUtils.isOwner(req.user, crypto);
     console.log(isOwner)

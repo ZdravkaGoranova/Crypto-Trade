@@ -25,10 +25,13 @@ exports.register = async (username, email, password, confirmPassword) => {
         throw new Error('User  exists!');
     }
 
+    if (username.length < 5) {
+        throw new Error('Username is too short!Username should be at least five characters long!');
+    }
     //TODO:Validate password колко дълга ,симшоли език,гл .букви
-    // if (password.lenght < 4) {
-    //     throw new Error('The password should be at least four characters long!');
-    // }
+    if (password.length < 4) {
+        throw new Error('The password should be at least four characters long!');
+    }
 
     const hashPassword = await bcrypt.hash(password, 10);
 

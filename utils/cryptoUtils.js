@@ -10,8 +10,8 @@ exports.generatePaymentMethod = function (paymentMethod) {
     //const isSelected = crypto.paymentMethod == key
 
     const result = paymentMethods.map(x => x.key == paymentMethod ? { ...x, selected: true } : x);
-
     //console.log(result)
+    
     return result;
 };
 

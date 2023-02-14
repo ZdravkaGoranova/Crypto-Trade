@@ -18,11 +18,11 @@ exports.buy = async (userId, cryptoId, req, res) => {
 
     if (isOwner) {
         return res.render('home/404');
-        throw new Error ('You is Owner')
+        //throw new Error ('You is Owner')
     }
     if (isBought) {
         return res.render('home/404');
-         throw new Error ('You already bought these crypto coins.')
+        // throw new Error ('You already bought these crypto coins.')
     }
 
     crypto.buyers.push(userId);

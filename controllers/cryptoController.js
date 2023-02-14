@@ -69,7 +69,7 @@ exports.getEditCrypto = async (req, res) => {
     const paymentMethods = cryptoUtils.generatePaymentMethod(crypto.paymentMethod);
 
     if (!cryptoUtils.isOwner(req.user, crypto)) {
-        throw new Error('You are not an owner!');
+        return res.render('home/404')// throw new Error('You are not an owner!');
     }
 
     res.render('crypto/edit', { crypto, paymentMethods });
@@ -94,7 +94,7 @@ exports.postEditCrypto = async (req, res) => {
 };
 
 exports.getDeleteCrypto = async (req, res) => {
-    const crypto = await cryptoService.getOne(req.params.cryptoId);
+   // const crypto = await cryptoService.getOne(req.params.cryptoId);
 
     const isOwner = cryptoUtils.isOwner(req.user, crypto);
     console.log(isOwner)
@@ -103,7 +103,7 @@ exports.getDeleteCrypto = async (req, res) => {
         return res.render('home/404');
     }
 
-    await cryptoService.delete(req.params.cryptoId);
+    await cryptoService.delete(req.params.cryptoId);//await cryptoService.delete(crypto);
     res.redirect('/catalog');
 };
 

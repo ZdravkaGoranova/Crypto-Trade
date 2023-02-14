@@ -6,7 +6,8 @@ const userShema = new mongoose.Schema({
     username: {
         type: String,
         required: [true, 'Username is required!'],
-        minLenght: [5, 'Username is too short!Username should be at least five characters long'],
+       // minLenght: 5,  НЕ МИНАВАТ ЗА ПРОВЕРКА
+        //minLenght: [5, 'Username is too short!Username should be at least five characters long'],
     },
     email: {
         type: String,
@@ -16,7 +17,8 @@ const userShema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Password is required!'],
-        minLenght: [4, 'Password should be at least four characters long!'],
+        //minLenght: 4,
+        //minLenght: [4, 'Password should be at least four characters long!'],
     },
     // }, {
     //     virtuals: {
